@@ -43,14 +43,23 @@ class FullScreen(object):
 		self.cv = Canvas(master)
 		self.cv.pack(fill=BOTH, expand=1)
 		rectt = self.cv.create_rectangle(0, 0, 0, 0, outline="blue", fill="black", width=2)
-
 	def takeShot(self, coords):
 		with mss.mss() as sct:
+			top = coords[0][1]
+			left = coords[0][0]
+			width = coords[1][0]-coords[0][0]
+			height = coords[1][1]-coords[0][1]
+			if width<0:
+				left += width
+				width = 0-width
+			if height<0:
+				top += height
+				height = 0-height
 			monitor = {
-			"top": coords[0][1],
-			"left": coords[0][0],
-			"width": coords[1][0]-coords[0][0],
-			"height": coords[1][1]-coords[0][1]}
+			"top": top,
+			"left": left,
+			"width": width,
+			"height": height}
 			now = datetime.now()
 			output = usrShots+f"\\skShot-{now.year}-{now.month}-{now.day}-{now.hour}-{now.minute}-{now.second}.png"
 
