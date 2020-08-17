@@ -1,3 +1,4 @@
+__author__ = "Tochi Bedford"
 import os
 from sys import exit
 from datetime import datetime
